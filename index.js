@@ -24,8 +24,9 @@ io.on('connection', (socket) => {
     console.log("A user connected on socket: " + socket.id + ".\nAdditional socket handshake info:\n" + socket.handshake);
 
     socket.on('canvas-data', (data) => {
+        console.log("Data received server side from " + socket.id);
         socket.broadcast.emit('canvas-data', data)
-        console.log("Data received from " + socket.id + " on server");
+        console.log("Data from " + socket.id + " sent to all clients");
     })
 })
 
