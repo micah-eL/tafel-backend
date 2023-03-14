@@ -21,11 +21,11 @@ const io = require('socket.io')(server, {
 })
 
 io.on('connection', (socket) => {
-    console.log('a user connected')
+    console.log("A user connected on socket: " + socket.id + ".\nAdditional socket handshake info:\n" + socket.handshake);
 
     socket.on('canvas-data', (data) => {
         socket.broadcast.emit('canvas-data', data)
-        console.log(data)
+        console.log(data.id + " sent to " + socket.id);
     })
 })
 
