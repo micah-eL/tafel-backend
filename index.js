@@ -1,8 +1,8 @@
 require('dotenv').config() //used for sensitive info
 const express = require('express')
 const app = express()
-const http = require('http')
-const server = http.createServer(app)
+const https = require('https')
+const server = https.createServer(app)
 const io = require('socket.io')(server, {
     cors: {
         origin: '*',
