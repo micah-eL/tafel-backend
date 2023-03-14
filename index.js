@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
 
     socket.on('canvas-data', (data) => {
         socket.broadcast.emit('canvas-data', data)
-        console.log(data.id + " sent to " + socket.id);
+        console.log("Data received from " + socket.id + " on server");
     })
 })
 
