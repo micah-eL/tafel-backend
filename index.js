@@ -1,17 +1,24 @@
 require('dotenv').config() //used for sensitive info
+
 const express = require('express')
-const app = express()
-const https = require('https')
-const server = https.createServer(app)
+var app = express()
+const cors = require('cors')
+app.use(cors())
+
+const PORT = process.env.PORT
+var server = app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+})
+
 const io = require('socket.io')(server, {
     cors: {
-        origin: '*',
+        origin: "https://master.d1cwd691lheo6s.amplifyapp.com/",
+        methods: ["GET"],
+        headers: {
+            'Access-Control-Allow-Origin' : '*'
+        }
     }
 })
-const cors = require('cors')
-
-//app.use(express.static('build')) // Use Build
-app.use(cors())
 
 io.on('connection', (socket) => {
     console.log('a user connected')
@@ -20,11 +27,6 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('canvas-data', data)
         console.log(data)
     })
-})
-
-const PORT = process.env.PORT
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
 })
 
 
